@@ -19,3 +19,4 @@ public enum UpgradeType
     AutoClickerPower,
     AutoClickerTime
 }
+//Script Created by James
