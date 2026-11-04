@@ -50,9 +50,16 @@ public class SaveAndLoadClicker : MonoBehaviour
         locationToSendAndRecieveData.clickPoints = dataToSaveAndLoad.clickPoints;
         locationToSendAndRecieveData.clickPower = dataToSaveAndLoad.clickPower;
         locationToSendAndRecieveData.autoClickPower = dataToSaveAndLoad.autoClickPower;
-        locationToSendAndRecieveData.upgrades = dataToSaveAndLoad.upgrades;
         locationToSendAndRecieveData.autoClickTimer = dataToSaveAndLoad.autoClickTimer;
         locationToSendAndRecieveData.autoClickTimerDuration = dataToSaveAndLoad.autoClickTimerDuration;
+        for (int upgrade = 0; upgrade < locationToSendAndRecieveData.upgrades.Length; upgrade++)
+        {
+            locationToSendAndRecieveData.upgrades[upgrade].level = dataToSaveAndLoad.upgrades[upgrade].level;
+            locationToSendAndRecieveData.upgrades[upgrade].amount = dataToSaveAndLoad.upgrades[upgrade].amount;
+            locationToSendAndRecieveData.upgrades[upgrade].cost = dataToSaveAndLoad.upgrades[upgrade].cost;
+            locationToSendAndRecieveData.upgrades[upgrade].costMultiplier = dataToSaveAndLoad.upgrades[upgrade].costMultiplier;
+        }             
+
     }
     public void Load()
     {

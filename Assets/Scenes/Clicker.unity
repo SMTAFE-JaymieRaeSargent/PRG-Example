@@ -839,7 +839,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 934120765}
         m_TargetAssemblyTypeName: SaveAndLoadClicker, Assembly-CSharp
-        m_MethodName: LoadOptions
+        m_MethodName: Load
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2921,7 +2921,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 934120765}
         m_TargetAssemblyTypeName: SaveAndLoadClicker, Assembly-CSharp
-        m_MethodName: SaveOptions
+        m_MethodName: Save
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
