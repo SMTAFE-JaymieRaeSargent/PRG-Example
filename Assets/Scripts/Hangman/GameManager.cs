@@ -4,7 +4,6 @@ namespace Hangman
     using TMPro;
     using UnityEngine.UI;
     using System.Collections.Generic;
-    using Unity.VisualScripting;
 
     public class GameManager : MonoBehaviour
     {
@@ -19,6 +18,20 @@ namespace Hangman
         public Color incorrectColour;
         public Button[] keyButton;
         public List<char> guessedLetters = new List<char>();
+        public GameSaveData saveAndLoadGame;
+        public LoadWordList wordListLoader;
+
+        private void LoadOrCreateWord()
+        {
+            saveAndLoadGame.Load();
+            // no saved word means this is a new game, so pick a word and save it
+            if (wordToGuess == "" || wordToGuess == null)
+            {
+                wordToGuess = wordListLoader.ChooseNewWord();
+                guessedLetters.Clear();
+                saveAndLoadGame.Save();
+            }
+        }
 
         void LettersInWord()
         {
@@ -38,19 +51,37 @@ namespace Hangman
         {
             keyButton = keyboardContainer.GetComponentsInChildren<Button>();
         }
+        void RestoreGuessedLetters()
+        {
+            // copy the loaded letters, clear the list, then guess each one again
+            // so the word and keyboard colours show the saved progress
+            List<char> lettersToRestore = new List<char>(guessedLetters);
+            guessedLetters.Clear();
+            foreach (char letter in lettersToRestore)
+            {
+                Guess(letter);
+            }
+        }
         private void Start()
         {
+            LoadOrCreateWord();
             LettersInWord();
             SpawnUIPerLetter();
             GetOnscreenKeys();
+            RestoreGuessedLetters();
         }
 
         public void PressedLetter(string letter)
         {
             Guess(letter[0]);
-        }   
+        }
         public void Guess(char letter)
         {
+            // ignore keys like space, enter and backspace
+            if (!char.IsLetter(letter))
+            {
+                return;
+            }
             letter = char.ToUpper(letter);
 
             if (guessedLetters.Contains(letter))
@@ -83,6 +114,9 @@ namespace Hangman
                 }
                 button.interactable = false;
             }
+
+            // save after every guess so Continue picks up where we left off
+            saveAndLoadGame.Save();
         }
         Button FindKey(char letter)
         {

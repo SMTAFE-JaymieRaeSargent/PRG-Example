@@ -12,12 +12,13 @@ public class LoadWordList : MonoBehaviour
         string loadedDataFromFile = File.ReadAllText(path);
         return JsonUtility.FromJson<Difficulty>(loadedDataFromFile);
     }
-    private void Awake()
+    public string ChooseNewWord()
     {
+        _selectDifficultyPath = $"{Application.dataPath}/Difficulty.json";
         _difficulty = LoadDifficultyPath(_selectDifficultyPath);
         _filePath = $"{Application.dataPath}/{_difficulty.difficulty}.json";
         words = LoadWordListFromPath(_filePath);
-        instance.wordToGuess = ChooseRandomWordFromList();
+        return ChooseRandomWordFromList();
     }
     WordLists LoadWordListFromPath(string path)
     {

@@ -7,6 +7,7 @@ public class DifficultySelect : MonoBehaviour
 {
     // path
     string _filePath = $"{Application.dataPath}/Difficulty.json";
+    string _saveFilePath = $"{Application.dataPath}/SaveGame.json";
     private Difficulty _difficulty = new Difficulty();
     // getting the selected Difficulty
     void Difficulty(string difficultySetting)
@@ -24,6 +25,14 @@ public class DifficultySelect : MonoBehaviour
     {
         Difficulty(difficulty);
         SaveDifficultySelectionToJson(_difficulty, _filePath);
+        ClearSaveFile();
+    }
+    public void ClearSaveFile()
+    {
+        HangmanSaveData blankSave = new HangmanSaveData();
+        blankSave.currentWord = "";
+        string saveToJson = JsonUtility.ToJson(blankSave);
+        File.WriteAllText(_saveFilePath, saveToJson);
     }
 }
 [Serializable]

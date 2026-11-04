@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Hangman Menu.unity
+    guid: 902bc1b225dbbda4f85eea3affdd9212
+  - enabled: 1
     path: Assets/Scenes/Hangman.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Clicker.unity
+    guid: 53357f1b0f4a6854484131d21a0b3f7f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
